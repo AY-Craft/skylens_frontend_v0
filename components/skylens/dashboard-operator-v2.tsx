@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 import {
   Bell,
@@ -27,6 +27,8 @@ interface Notification {
 
 export function DashboardOperator() {
   const [showNotifications, setShowNotifications] = useState(false)
+  const [selectedMissionDate, setSelectedMissionDate] = useState("today")
+  const missionsRef = useRef<HTMLDivElement>(null)
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: "1",
@@ -153,16 +155,42 @@ export function DashboardOperator() {
         {/* Top KPIs */}
         <div className="grid gap-4 md:grid-cols-3 mb-8">
           <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Flights This Week
+                  Missions
                 </p>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
                   4
                 </p>
               </div>
               <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div className="flex gap-2 text-xs">
+              {[
+                { label: "Today", value: "today" },
+                { label: "Tomorrow", value: "tomorrow" },
+                { label: "Week", value: "week" },
+              ].map((date) => (
+                <button
+                  key={date.value}
+                  onClick={() => {
+                    setSelectedMissionDate(date.value)
+                    if (date.value === "today" && missionsRef.current) {
+                      setTimeout(() => {
+                        missionsRef.current?.scrollIntoView({ behavior: "smooth" })
+                      }, 100)
+                    }
+                  }}
+                  className={`px-3 py-1 rounded transition ${
+                    selectedMissionDate === date.value
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300"
+                  }`}
+                >
+                  {date.label}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -254,11 +282,14 @@ export function DashboardOperator() {
                 </div>
               </div>
 
-              <div className="rounded-lg bg-blue-50 p-3 dark:bg-blue-950/30">
+              <Link
+                href="/operator/waypoint-templates"
+                className="block rounded-lg bg-blue-50 p-3 hover:bg-blue-100 dark:bg-blue-950/30 dark:hover:bg-blue-950/50 transition"
+              >
                 <p className="text-xs text-blue-900 dark:text-blue-200">
-                  ✓ Venue QR verified | Ready for mission
+                  ✓ Venue QR verified | View Waypoints
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
 
@@ -271,7 +302,8 @@ export function DashboardOperator() {
               <Drone className="h-5 w-5 text-slate-600 dark:text-slate-400" />
             </div>
 
-            <div className="space-y-4">
+            {/* Primary Drone */}
+            <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-800">
               <div>
                 <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
                   Model
@@ -281,48 +313,121 @@ export function DashboardOperator() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
-                    Battery
+                    Series
                   </p>
-                  <div className="mt-1 flex items-center gap-2">
-                    <div className="h-2 w-8 rounded-full bg-green-500"></div>
-                    <p className="text-sm font-semibold text-green-600 dark:text-green-400">
-                      92%
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
-                    Camera
-                  </p>
-                  <p className="text-sm text-slate-700 dark:text-slate-300 mt-1">
-                    48MP
+                  <p className="text-sm text-slate-700 dark:text-slate-300">
+                    Air Series
                   </p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
-                    Signal
+                    Brand
                   </p>
-                  <p className="text-sm text-slate-700 dark:text-slate-300 mt-1">
-                    Excellent
+                  <p className="text-sm text-slate-700 dark:text-slate-300">
+                    DJI
                   </p>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+              <div>
                 <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase mb-2">
-                  Flight Time
+                  Components
                 </p>
-                <p className="text-sm text-slate-700 dark:text-slate-300">
-                  Total: 45h 23m | This Session: 12m
-                </p>
+                <ul className="space-y-1 text-sm text-slate-700 dark:text-slate-300">
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Battery: Intelligent Flight Battery
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Remote: DJI RC-N1 Controller
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    SD Card: 256GB High Speed
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Camera: Dual 20MP Sensor
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Gimbal: 3-Axis Motorized
+                  </li>
+                </ul>
               </div>
 
               <div className="rounded-lg bg-green-50 p-3 dark:bg-green-950/30">
                 <p className="text-xs text-green-900 dark:text-green-200">
                   ✓ All systems operational
+                </p>
+              </div>
+            </div>
+
+            {/* Backup Drone */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                Backup Drone
+              </h3>
+
+              <div>
+                <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
+                  Model
+                </p>
+                <p className="text-lg font-semibold text-slate-900 dark:text-white">
+                  DJI Mini 4 Pro
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
+                    Series
+                  </p>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">
+                    Mini Series
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">
+                    Brand
+                  </p>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">
+                    DJI
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase mb-2">
+                  Components
+                </p>
+                <ul className="space-y-1 text-sm text-slate-700 dark:text-slate-300">
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Battery: Intelligent Flight Battery
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Remote: DJI RC-N1 Controller
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    SD Card: 128GB High Speed
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    Camera: 12MP Sensor
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-lg bg-amber-50 p-3 dark:bg-amber-950/30">
+                <p className="text-xs text-amber-900 dark:text-amber-200">
+                  ℹ Standby ready
                 </p>
               </div>
             </div>
@@ -376,7 +481,7 @@ export function DashboardOperator() {
           </div>
 
           {/* Today's Missions */}
-          <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
+          <div ref={missionsRef} className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 Today's Missions

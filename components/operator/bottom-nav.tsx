@@ -17,8 +17,8 @@ const navItems = [
     center: true,
   },
   {
-    href: "/operator/missions",
-    label: "Missions",
+    href: "/operator/schedule",
+    label: "Schedule",
     icon: Zap,
   },
 ]
