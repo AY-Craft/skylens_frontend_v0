@@ -40,7 +40,7 @@ export function DashboardOperator() {
       id: "2",
       type: "info",
       title: "New Mission Available",
-      description: "Corporate Event - $450 | Next Sunday",
+      description: "Corporate Event | Next Sunday",
       timestamp: "4 hours ago",
       read: false,
     },
@@ -151,7 +151,7 @@ export function DashboardOperator() {
       {/* Main Content */}
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-8 pb-32 md:pb-8">
         {/* Top KPIs */}
-        <div className="grid gap-4 md:grid-cols-4 mb-8">
+        <div className="grid gap-4 md:grid-cols-3 mb-8">
           <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
             <div className="flex items-center justify-between">
               <div>
@@ -191,20 +191,6 @@ export function DashboardOperator() {
                 </p>
               </div>
               <Clock className="h-8 w-8 text-amber-600 dark:text-amber-400" />
-            </div>
-          </div>
-
-          <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Total Earnings
-                </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  $2,450
-                </p>
-              </div>
-              <TrendingUp className="h-8 w-8 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
         </div>

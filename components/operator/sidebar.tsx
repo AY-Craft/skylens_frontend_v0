@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Home, Zap, QrCode, Settings, LogOut } from "lucide-react"
+import { Home, Zap, Calendar, Map, Settings, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
@@ -19,12 +19,12 @@ const navItems = [
   {
     href: "/operator/schedule",
     label: "Schedule",
-    icon: QrCode,
+    icon: Calendar,
   },
   {
     href: "/operator/waypoint-templates",
     label: "Waypoints",
-    icon: QrCode,
+    icon: Map,
   },
 ]
 

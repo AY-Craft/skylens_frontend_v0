@@ -88,10 +88,10 @@ export default function SchedulePage() {
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Calendar */}
-          <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950 lg:col-span-2">
+          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-6 lg:col-span-2">
             {/* Calendar Header */}
             <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
                 {monthName}
               </h2>
               <div className="flex gap-2">
@@ -111,7 +111,7 @@ export default function SchedulePage() {
             </div>
 
             {/* Day Headers */}
-            <div className="mb-4 grid grid-cols-7 gap-2 text-center">
+            <div className="mb-4 grid grid-cols-7 gap-1 md:gap-2 text-center">
               {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                 <div
                   key={day}
@@ -123,7 +123,7 @@ export default function SchedulePage() {
             </div>
 
             {/* Calendar Days */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-1 md:gap-2">
               {days.map((day, idx) => {
                 const missions = day ? getMissionsForDate(day) : []
                 const isToday =
@@ -133,7 +133,7 @@ export default function SchedulePage() {
                 return (
                   <div
                     key={idx}
-                    className={`min-h-24 rounded-lg border p-2 text-sm ${
+                    className={`min-h-20 md:min-h-24 rounded-lg border p-1 md:p-2 text-xs md:text-sm ${
                       day
                         ? "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950"
                         : "border-slate-100 bg-slate-50 dark:border-slate-900 dark:bg-slate-900"
@@ -142,7 +142,7 @@ export default function SchedulePage() {
                     {day && (
                       <>
                         <p
-                          className={`mb-1 font-semibold ${
+                          className={`mb-1 font-semibold text-xs md:text-sm ${
                             isToday
                               ? "text-blue-600 dark:text-blue-400"
                               : "text-slate-900 dark:text-white"
@@ -150,19 +150,18 @@ export default function SchedulePage() {
                         >
                           {day}
                         </p>
-                        <div className="space-y-1">
+                        <div className="space-y-0.5">
                           {missions.slice(0, 2).map((mission) => (
                             <div
                               key={mission.id}
-                              className="rounded bg-blue-100 p-1 text-xs text-blue-900 dark:bg-blue-900 dark:text-blue-100"
+                              className="rounded bg-blue-100 p-0.5 text-xs text-blue-900 dark:bg-blue-900 dark:text-blue-100 truncate"
                             >
-                              <p className="truncate font-medium">{mission.title}</p>
-                              <p className="truncate text-xs">{mission.time}</p>
+                              <p className="truncate font-medium text-xs">{mission.title}</p>
                             </div>
                           ))}
                           {missions.length > 2 && (
                             <p className="text-xs text-slate-600 dark:text-slate-400">
-                              +{missions.length - 2} more
+                              +{missions.length - 2}
                             </p>
                           )}
                         </div>
@@ -176,11 +175,11 @@ export default function SchedulePage() {
 
           {/* Sidebar - Upcoming Missions */}
           <div className="space-y-4">
-            <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-              <h3 className="mb-4 text-lg font-bold text-slate-900 dark:text-white">
+            <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-6">
+              <h3 className="mb-4 text-base md:text-lg font-bold text-slate-900 dark:text-white">
                 Upcoming Missions
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-96 overflow-y-auto">
                 {mockMissions
                   .filter((m) => m.status === "scheduled")
                   .map((mission) => (
@@ -188,7 +187,7 @@ export default function SchedulePage() {
                       key={mission.id}
                       className="rounded-lg border border-slate-200 p-3 dark:border-slate-800"
                     >
-                      <p className="font-semibold text-slate-900 dark:text-white">
+                      <p className="font-semibold text-sm md:text-base text-slate-900 dark:text-white">
                         {mission.title}
                       </p>
                       <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
@@ -211,8 +210,8 @@ export default function SchedulePage() {
             </div>
 
             {/* Quick Stats */}
-            <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-              <h3 className="mb-4 text-lg font-bold text-slate-900 dark:text-white">
+            <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-6">
+              <h3 className="mb-4 text-base md:text-lg font-bold text-slate-900 dark:text-white">
                 This Month
               </h3>
               <div className="space-y-2">
@@ -230,14 +229,6 @@ export default function SchedulePage() {
                   </span>
                   <span className="font-bold text-blue-600 dark:text-blue-400">
                     {mockMissions.filter((m) => m.status === "scheduled").length}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
-                    Total Earnings
-                  </span>
-                  <span className="font-bold text-green-600 dark:text-green-400">
-                    $3,300
                   </span>
                 </div>
               </div>

@@ -1,12 +1,9 @@
 "use client"
 
-"use client"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle2, MapPin, QrCode } from "lucide-react"
-import { QRScanner } from "@/components/operator/qr-scanner"
+import { ArrowLeft, CheckCircle2, MapPin } from "lucide-react"
 
 export default function VerifyQRPage() {
   const router = useRouter()
@@ -16,9 +13,6 @@ export default function VerifyQRPage() {
   const handleQRScan = (decodedText: string) => {
     // Parse QR data - expecting venue ID
     console.log("[v0] QR Scanned:", decodedText)
-
-    // Simulate venue lookup
-    const venueId = decodedText.split(":")[-1] || decodedText
 
     // Simulate successful verification
     setScannedData(decodedText)
@@ -43,7 +37,7 @@ export default function VerifyQRPage() {
             >
               <ArrowLeft className="h-4 w-4 text-slate-600" />
             </button>
-            <h1 className="text-lg font-bold text-slate-900">Verify Arrival</h1>
+            <h1 className="text-lg font-bold text-slate-900">Scan Venue QR Code</h1>
           </div>
         </div>
       </header>
@@ -63,14 +57,24 @@ export default function VerifyQRPage() {
               </p>
             </div>
 
-            {/* QR Scanner */}
-            <QRScanner
-              onScan={handleQRScan}
-              onError={(error) => console.error("[v0] QR Error:", error)}
-            />
+            {/* QR Scanner Frame - Placeholder for camera */}
+            <div className="w-full aspect-square bg-slate-900 rounded-xl overflow-hidden border-4 border-slate-300 mb-8 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-slate-400 text-sm">Camera would appear here</div>
+                <p className="text-slate-500 text-xs mt-2">QR scanner requires camera access</p>
+              </div>
+            </div>
+
+            {/* Simulate QR scan button for testing */}
+            <button
+              onClick={() => handleQRScan("VENUE-ID-12345")}
+              className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 transition mb-4"
+            >
+              Simulate QR Scan (for testing)
+            </button>
 
             {/* Additional Info */}
-            <div className="mt-8 rounded-xl bg-blue-50 border border-blue-200 p-4">
+            <div className="rounded-xl bg-blue-50 border border-blue-200 p-4">
               <h3 className="font-semibold text-blue-900 text-sm">Tips for better scanning:</h3>
               <ul className="text-sm text-blue-800 mt-2 space-y-1">
                 <li>• Ensure adequate lighting at the venue</li>
