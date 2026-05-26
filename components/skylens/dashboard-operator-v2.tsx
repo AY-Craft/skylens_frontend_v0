@@ -293,7 +293,117 @@ export function DashboardOperator() {
             </div>
           </div>
 
-          {/* Drone Details */}
+          {/* Weather Alerts & Today's Missions */}
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Weather */}
+            <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Weather
+                </h2>
+                <Cloud className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-600 dark:text-slate-400">Temperature</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    72°F
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-600 dark:text-slate-400">Wind Speed</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    8 mph
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-600 dark:text-slate-400">
+                    <Wind className="inline h-4 w-4 mr-1" /> Wind Gusts
+                  </span>
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    12 mph
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-600 dark:text-slate-400">Visibility</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    10 miles
+                  </span>
+                </div>
+                <div className="mt-3 rounded-lg bg-green-50 p-3 dark:bg-green-950/30">
+                  <p className="text-xs text-green-900 dark:text-green-200">
+                    ✓ Optimal flying conditions
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Today's Missions - Full Width */}
+            <div ref={missionsRef} className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950 md:col-span-2">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Today's Missions
+                </h2>
+                <Zap className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-3">
+                <Link
+                  href="/operator/mission/1"
+                  className="block rounded-lg border border-slate-200 p-3 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition cursor-pointer"
+                >
+                  <div>
+                    <p className="font-semibold text-slate-900 dark:text-white">
+                      Wedding Ceremony
+                    </p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                      3:00 PM - The Garden Venue
+                    </p>
+                    <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200 mt-2">
+                      Scheduled
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/operator/mission/2"
+                  className="block rounded-lg border border-slate-200 p-3 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition cursor-pointer"
+                >
+                  <div>
+                    <p className="font-semibold text-slate-900 dark:text-white">
+                      Corporate Event
+                    </p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                      6:00 PM - Downtown Plaza
+                    </p>
+                    <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800 dark:bg-amber-900 dark:text-amber-200 mt-2">
+                      Pending
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/operator/mission/3"
+                  className="block rounded-lg border border-slate-200 p-3 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition cursor-pointer"
+                >
+                  <div>
+                    <p className="font-semibold text-slate-900 dark:text-white">
+                      Real Estate Shoot
+                    </p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                      10:00 AM - Beachfront Property
+                    </p>
+                    <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">
+                      In Progress
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Drone Details - Moved to bottom */}
           <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -430,111 +540,6 @@ export function DashboardOperator() {
                   ℹ Standby ready
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Weather Alerts & Today's Missions */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* Weather */}
-          <div className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                Weather
-              </h2>
-              <Cloud className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600 dark:text-slate-400">Temperature</span>
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  72°F
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600 dark:text-slate-400">Wind Speed</span>
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  8 mph
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600 dark:text-slate-400">
-                  <Wind className="inline h-4 w-4 mr-1" /> Wind Gusts
-                </span>
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  12 mph
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600 dark:text-slate-400">Visibility</span>
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  10 miles
-                </span>
-              </div>
-              <div className="mt-3 rounded-lg bg-green-50 p-3 dark:bg-green-950/30">
-                <p className="text-xs text-green-900 dark:text-green-200">
-                  ✓ Optimal flying conditions
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Today's Missions */}
-          <div ref={missionsRef} className="rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                Today's Missions
-              </h2>
-              <Zap className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-            </div>
-
-            <div className="space-y-3">
-              <Link
-                href="/operator/mission/1"
-                className="block rounded-lg border border-slate-200 p-3 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-slate-900 dark:text-white">
-                      Wedding Ceremony
-                    </p>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
-                      3:00 PM - The Garden Venue
-                    </p>
-                  </div>
-                  <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                    Scheduled
-                  </span>
-                </div>
-              </Link>
-
-              <Link
-                href="/operator/mission/2"
-                className="block rounded-lg border border-slate-200 p-3 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-slate-900 dark:text-white">
-                      Corporate Event
-                    </p>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
-                      6:00 PM - Downtown Plaza
-                    </p>
-                  </div>
-                  <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800 dark:bg-amber-900 dark:text-amber-200">
-                    Pending
-                  </span>
-                </div>
-              </Link>
-
-              <Link
-                href="/operator/missions"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                <Eye className="h-4 w-4" />
-                View All Missions
-              </Link>
             </div>
           </div>
         </div>
