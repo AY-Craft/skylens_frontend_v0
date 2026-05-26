@@ -61,7 +61,7 @@ const missionHistory = [
     id: 4,
     bookingId: 'BK004',
     customerName: 'Gourmet Restaurant Group',
-    location: 'Chef's Garden Venue',
+    location: "Chef's Garden Venue",
     date: 'Mar 17',
     startTime: '04:00 PM',
     endTime: '06:45 PM',

@@ -1,5 +1,5 @@
-import { DashboardOperatorPremium } from "@/components/skylens/dashboard-operator-premium"
+import { DashboardOperator } from "@/components/skylens/dashboard-operator"
 
 export default function OperatorDashboardPage() {
-  return <DashboardOperatorPremium />
+  return <DashboardOperator />
 }
