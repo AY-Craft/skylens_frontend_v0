@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Bell, ChevronDown, LogOut, Settings, UserCircle } from 'lucide-react'
+import { ChevronDown, LogOut, Settings, UserCircle } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
+import { NotificationDropdown } from '@/components/notification-dropdown'
 
 interface OperatorLayoutProps {
   children: React.ReactNode
@@ -47,10 +48,7 @@ export function OperatorLayout({ children, title }: OperatorLayoutProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-operator-gray-light text-operator-gray hover:bg-operator-sand-light transition" aria-label="Notifications">
-              <Bell className="h-4 w-4" />
-              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
-            </button>
+            <NotificationDropdown />
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
