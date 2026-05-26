@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowLeft, MapPin, Clock, DollarSign, CheckCircle2, AlertCircle } from "lucide-react"
+import { MapPin, Clock, DollarSign, CheckCircle2, AlertCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const activeMissions = [
@@ -64,9 +64,6 @@ export default function MissionsPage() {
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 md:px-8">
-          <Link href="/operator/dashboard" className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 hover:bg-slate-50 transition">
-            <ArrowLeft className="h-4 w-4 text-slate-600" />
-          </Link>
           <h1 className="text-lg font-bold text-slate-900">My Missions</h1>
         </div>
       </header>
