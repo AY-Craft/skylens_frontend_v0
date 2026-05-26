@@ -137,7 +137,7 @@ export function NotificationDropdown() {
 
       {/* Notification Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg z-50">
+        <div className="fixed md:absolute bottom-20 md:bottom-auto right-4 md:right-0 mt-2 w-80 max-w-[calc(100vw-32px)] md:max-w-[320px] rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg z-50">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4 py-3">
             <h3 className="font-semibold text-slate-900 dark:text-white">Notifications</h3>

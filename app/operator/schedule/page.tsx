@@ -85,37 +85,37 @@ export default function SchedulePage() {
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-        <div className="grid gap-8 lg:grid-cols-3">
+      <main className="mx-auto max-w-7xl px-4 py-6 md:py-8 md:px-8">
+        <div className="grid gap-6 md:gap-8 lg:grid-cols-3">
           {/* Calendar */}
-          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-6 lg:col-span-2">
+          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-950 md:p-6 lg:col-span-2">
             {/* Calendar Header */}
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
+            <div className="mb-4 md:mb-6 flex items-center justify-between">
+              <h2 className="text-base md:text-xl font-bold text-slate-900 dark:text-white">
                 {monthName}
               </h2>
-              <div className="flex gap-2">
+              <div className="flex gap-1 md:gap-2">
                 <button
                   onClick={prevMonth}
-                  className="rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+                  className="rounded-lg p-1.5 md:p-2 hover:bg-slate-100 dark:hover:bg-slate-900"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
                 </button>
                 <button
                   onClick={nextMonth}
-                  className="rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+                  className="rounded-lg p-1.5 md:p-2 hover:bg-slate-100 dark:hover:bg-slate-900"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
                 </button>
               </div>
             </div>
 
             {/* Day Headers */}
-            <div className="mb-4 grid grid-cols-7 gap-1 md:gap-2 text-center">
+            <div className="mb-2 md:mb-4 grid grid-cols-7 gap-0.5 md:gap-2 text-center">
               {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                 <div
                   key={day}
-                  className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase"
+                  className="text-xs md:text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase py-1 md:py-2"
                 >
                   {day}
                 </div>
@@ -123,7 +123,7 @@ export default function SchedulePage() {
             </div>
 
             {/* Calendar Days */}
-            <div className="grid grid-cols-7 gap-1 md:gap-2">
+            <div className="grid grid-cols-7 gap-0.5 md:gap-2">
               {days.map((day, idx) => {
                 const missions = day ? getMissionsForDate(day) : []
                 const isToday =
@@ -133,7 +133,7 @@ export default function SchedulePage() {
                 return (
                   <div
                     key={idx}
-                    className={`min-h-20 md:min-h-24 rounded-lg border p-1 md:p-2 text-xs md:text-sm ${
+                    className={`min-h-16 md:min-h-24 rounded-lg border p-1 md:p-2 text-xs md:text-sm transition ${
                       day
                         ? "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950"
                         : "border-slate-100 bg-slate-50 dark:border-slate-900 dark:bg-slate-900"
@@ -142,7 +142,7 @@ export default function SchedulePage() {
                     {day && (
                       <>
                         <p
-                          className={`mb-1 font-semibold text-xs md:text-sm ${
+                          className={`mb-0.5 md:mb-1 font-semibold text-xs md:text-sm ${
                             isToday
                               ? "text-blue-600 dark:text-blue-400"
                               : "text-slate-900 dark:text-white"
@@ -150,17 +150,18 @@ export default function SchedulePage() {
                         >
                           {day}
                         </p>
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.25 md:space-y-0.5">
                           {missions.slice(0, 2).map((mission) => (
                             <div
                               key={mission.id}
                               className="rounded bg-blue-100 p-0.5 text-xs text-blue-900 dark:bg-blue-900 dark:text-blue-100 truncate"
+                              title={mission.title}
                             >
                               <p className="truncate font-medium text-xs">{mission.title}</p>
                             </div>
                           ))}
                           {missions.length > 2 && (
-                            <p className="text-xs text-slate-600 dark:text-slate-400">
+                            <p className="text-xs text-slate-600 dark:text-slate-400 px-0.5">
                               +{missions.length - 2}
                             </p>
                           )}
@@ -173,21 +174,22 @@ export default function SchedulePage() {
             </div>
           </div>
 
-          {/* Sidebar - Upcoming Missions */}
-          <div className="space-y-4">
+          {/* Sidebar - Upcoming Missions & Stats */}
+          <div className="space-y-4 md:space-y-6">
+            {/* Upcoming Missions */}
             <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-6">
-              <h3 className="mb-4 text-base md:text-lg font-bold text-slate-900 dark:text-white">
-                Upcoming Missions
+              <h3 className="mb-3 md:mb-4 text-sm md:text-lg font-bold text-slate-900 dark:text-white">
+                Upcoming
               </h3>
-              <div className="space-y-3 max-h-96 overflow-y-auto">
+              <div className="space-y-2 md:space-y-3 max-h-64 md:max-h-96 overflow-y-auto">
                 {mockMissions
                   .filter((m) => m.status === "scheduled")
                   .map((mission) => (
                     <div
                       key={mission.id}
-                      className="rounded-lg border border-slate-200 p-3 dark:border-slate-800"
+                      className="rounded-lg border border-slate-200 p-2 md:p-3 dark:border-slate-800"
                     >
-                      <p className="font-semibold text-sm md:text-base text-slate-900 dark:text-white">
+                      <p className="font-semibold text-xs md:text-sm text-slate-900 dark:text-white">
                         {mission.title}
                       </p>
                       <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
@@ -196,11 +198,11 @@ export default function SchedulePage() {
                       <p className="text-xs text-slate-600 dark:text-slate-400">
                         {mission.duration} • {mission.client}
                       </p>
-                      <div className="mt-2 flex gap-2">
-                        <button className="flex-1 rounded bg-blue-600 py-1 text-xs font-medium text-white hover:bg-blue-700">
+                      <div className="mt-2 flex gap-1 md:gap-2">
+                        <button className="flex-1 rounded bg-blue-600 py-1.5 md:py-2 text-xs font-medium text-white hover:bg-blue-700 transition">
                           Start
                         </button>
-                        <button className="flex-1 rounded border border-slate-200 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-900">
+                        <button className="flex-1 rounded border border-slate-200 py-1.5 md:py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-900 transition">
                           Reschedule
                         </button>
                       </div>
@@ -211,23 +213,23 @@ export default function SchedulePage() {
 
             {/* Quick Stats */}
             <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-6">
-              <h3 className="mb-4 text-base md:text-lg font-bold text-slate-900 dark:text-white">
+              <h3 className="mb-3 md:mb-4 text-sm md:text-lg font-bold text-slate-900 dark:text-white">
                 This Month
               </h3>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
-                    Total Missions
+                  <span className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
+                    Total
                   </span>
-                  <span className="font-bold text-slate-900 dark:text-white">
+                  <span className="font-bold text-sm md:text-base text-slate-900 dark:text-white">
                     {mockMissions.length}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
+                  <span className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                     Scheduled
                   </span>
-                  <span className="font-bold text-blue-600 dark:text-blue-400">
+                  <span className="font-bold text-sm md:text-base text-blue-600 dark:text-blue-400">
                     {mockMissions.filter((m) => m.status === "scheduled").length}
                   </span>
                 </div>
